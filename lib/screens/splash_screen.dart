@@ -1,48 +1,59 @@
+import 'package:bmi/screens/bmi_input_screen.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashScreen> createState() =>  SplashScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class  SplashScreenState extends State<SplashScreen> {
-  
+class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/home');
+    Future.delayed(const Duration(seconds: 3), () {
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute<void>(
+            builder: (BuildContext context) => const InputScreen(),
+          ),
+        );
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'BMI Calculator Splash',
-              style: TextStyle(
-                fontSize: 50,
-                fontWeight: FontWeight.bold,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Anutio Splash',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w900,
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'By Sami Ibrahim',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+              SizedBox(
+                height: 30,
               ),
-            ),
-          ],
-
+              Text(
+                'Welcome to the BMI calculator',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
