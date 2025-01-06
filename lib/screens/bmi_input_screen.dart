@@ -6,6 +6,8 @@ import 'package:bmi/widgets/resueable_column.dart';
 import 'package:bmi/widgets/bottom_button.dart';
 import 'package:bmi/widgets/rounded_icon.button.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:bmi/view/bmi_calculator.dart';
+import 'package:bmi/screens/bmi_result_screen.dart';
 
 class InputScreen extends StatefulWidget {
   const InputScreen({super.key});
@@ -20,31 +22,31 @@ class _InputScreenState extends State<InputScreen> {
   int weightNum = 60;
   int ageNum = 20;
 
-  // void calculateBmi() {
-  //   setState(() {});
+  void calculateBmi() {
+    setState(() {});
 
-  //   BmiCalculator calc = BmiCalculator(
-  //     height: heightNum,
-  //     weight: weightNum,
-  //   );
+    BmiCalculator calc = BmiCalculator(
+      height: heightNum,
+      weight: weightNum,
+    );
 
-  //   final bmi = calc.calculateBMI();
-  //   final advice = calc.getAdvice();
-  //   final answer = calc.getResult();
+    final bmi = calc.calculateBMI();
+    final advice = calc.getAdvice();
+    final answer = calc.getResult();
 
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) {
-  //         return BMIResultScreen(
-  //           ansText: bmi,
-  //           ansResult: answer,
-  //           ansAdvice: advice,
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return BMIResultScreen(
+            ansText: bmi,
+            ansResult: answer,
+            ansAdvice: advice,
+          );
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -184,9 +186,9 @@ class _InputScreenState extends State<InputScreen> {
                                     weightNum--;
                                   });
                                 } else {
-                                  // const SnackBar(
-                                  //   content: Text('Age cannot be less than 1'),
-                                  // );
+                                  const SnackBar(
+                                    content: Text('Age cannot be less than 1'),
+                                  );
                                 }
                               },
                             ),
@@ -199,9 +201,9 @@ class _InputScreenState extends State<InputScreen> {
                                     weightNum++;
                                   });
                                 } else {
-                                  // const SnackBar(
-                                  //   content: Text('Age cannot be greater than 100'),
-                                  // );
+                                  const SnackBar(
+                                    content: Text('Age cannot be greater than 100'),
+                                  );
                                 }
                               },
                             ),
@@ -233,9 +235,9 @@ class _InputScreenState extends State<InputScreen> {
                                     ageNum--;
                                   });
                                 } else {
-                                  // const SnackBar(
-                                  //   content: Text('Age cannot be less than 1'),
-                                  // );
+                                  const SnackBar(
+                                    content: Text('Age cannot be less than 1'),
+                                  );
                                 }
                               },
                             ),
@@ -248,9 +250,9 @@ class _InputScreenState extends State<InputScreen> {
                                     ageNum++;
                                   });
                                 } else {
-                                  // const SnackBar(
-                                  //   content: Text('Age cannot be greater than 100'),
-                                  // );
+                                  const SnackBar(
+                                    content: Text('Age cannot be greater than 100'),
+                                  );
                                 }
                               },
                             ),
@@ -265,9 +267,8 @@ class _InputScreenState extends State<InputScreen> {
           ),
           BottomButton(
             buttonTitle: 'CALCULATE',
-            onTap: () => {
-              print("okay"),
-            }),
+            onTap: calculateBmi,
+          )
         ],
       ),
     );
