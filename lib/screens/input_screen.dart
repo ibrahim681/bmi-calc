@@ -1,13 +1,16 @@
+import 'package:calculator/utils/print_func.dart';
 import 'package:flutter/material.dart';
-import 'package:calculator/screens/result_screen.dart';
 import 'package:calculator/widgets/reuseable_card.dart';
 import 'package:calculator/widgets/reuseable_column.dart';
 import 'package:calculator/utils/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:calculator/widgets/rounded_icon.button.dart';
 import 'package:calculator/widgets/bottom_button.dart';
+import 'package:go_router/go_router.dart';
 
-class InputScreen extends StatefulWidget{
+class InputScreen extends StatefulWidget {
+  static const id = 'input_screen';
+
   const InputScreen({super.key});
 
   @override
@@ -15,34 +18,51 @@ class InputScreen extends StatefulWidget{
 }
 
 class _InputScreenState extends State<InputScreen> {
+  int result = 0;
+
   int num1 = 0;
   int num2 = 0;
   String operation = 'multiply';
 
-  void calculate() {
+  Future<void> calculate() async {
     if (operation == 'add') {
       setState(() {
-        num1 = num1 + num2;
+        result = num1 + num2;
       });
     } else if (operation == 'minus') {
       setState(() {
-        num1 = num1 - num2;
+        result = num1 - num2;
       });
     } else if (operation == 'multiply') {
       setState(() {
-        num1 = num1 * num2;
+        result = num1 * num2;
       });
     } else if (operation == 'divide') {
       setState(() {
-        num1 = num1 ~/ num2;
+        result = num1 ~/ num2;
       });
     }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute<void>(
-        builder: (context) => ResultScreen(num1: num1),
-      ));
+    final poppedResult = await context.pushNamed(
+      InputScreen.id,
+    );
+
+    // Navigator.pushNamed(
+    //   context,
+    //   ResultScreen.id,
+    //   arguments: {
+    //     'num1': num1,
+    //   },
+    // );
+
+    // final poppedResult = await Navigator.push(
+    //   context,
+    //   MaterialPageRoute<void>(
+    //     builder: (context) => ResultScreen(num1: num1),
+    //   ),
+    // ) as String;
+
+    printScreen(poppedResult);
   }
 
   @override

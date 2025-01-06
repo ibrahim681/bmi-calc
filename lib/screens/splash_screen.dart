@@ -1,30 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:calculator/screens/input_screen.dart';
+import 'package:go_router/go_router.dart';
 
-class SplashScreen extends StatefulWidget{
+class SplashScreen extends StatefulWidget {
+  static const id = 'splash_screen';
+
   const SplashScreen({super.key});
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-    @override
-    void initState() {
+  @override
+  void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute<void>(
-            builder: (BuildContext context) => const InputScreen(),
-          ),
-        );
-      }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
+          //  Navigator.pushReplacementNamed(context, InputScreen.id);
+
+          // Navigator.push(
+          //   context,
+          //   CupertinoPageRoute<void>(
+          //     builder: (BuildContext context) => const InputScreen(),
+          //   ),
+          // );
+
+          // pushScreen(
+          //   const InputScreen(),
+          //   context: context,
+          // );
+
+          context.pushNamed(
+            InputScreen.id,
+          );
+        }
+      });
     });
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
